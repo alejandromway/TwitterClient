@@ -1,0 +1,22 @@
+<ion-item>
+    <ion-segment [(ngModel)]="searchSegmentValue">
+        <ion-segment-button value="true" (ionSelect)="toggleSearchOnline()">
+            Search Online
+        </ion-segment-button>
+        <ion-segment-button value="false" (ionSelect)="toggleSearchOnline()">
+            Search Local
+        </ion-segment-button>
+    </ion-segment>
+</ion-item>
+<ion-searchbar #searchbar (change)="searchFn($event)"></ion-searchbar>
+<ion-list>
+    <div class="newTweetsAvailable" *ngIf="tweetBuffer.length == 1;" (click)="flushBuffer()">{{tweetBuffer.length}} new tweet is available</div>
+    <div class="newTweetsAvailable" *ngIf="tweetBuffer.length > 1;" (click)="flushBuffer()">{{tweetBuffer.length}} new tweets are available</div>
+
+    <ion-item *ngFor="let tweet of _tweets | search: term:searchOnline | sorttweets:sortBy" (click)="showDetail(tweet)">
+        <h2>{{ tweet.user.name }}</h2>
+        <h3>{{ tweet.text }}</h3>
+    </ion-item>
+
+    <ion-spinner *ngIf="isLoading"></ion-spinner>
+</ion-list> 

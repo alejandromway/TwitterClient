@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Tweets List</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="checkConnection(false)">Check Connection</button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="checkSorting()">Sort By</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <tweets-list name="tweetsSearch" [tweets]=tweets [sortBy]="sortBy" [searchTwitter]=searchTwitter></tweets-list>
+</ion-content>
